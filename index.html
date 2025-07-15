@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday My Love 💖</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    body {
+      font-family: 'Pacifico', cursive;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: pink;
+      animation: fall 3s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-pink-100 overflow-x-hidden">
+
+  <!-- Confetti -->
+  <div id="confetti-container" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none"></div>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative z-10">
+    <h1 class="text-5xl md:text-6xl text-pink-600 mb-4 animate-bounce">Happy Birthday 🎂</h1>
+    <h2 class="text-2xl md:text-3xl text-gray-700 mb-6">To My Sweetest Girl 💕</h2>
+    <p class="text-lg text-gray-600 max-w-xl mx-auto mb-6">
+      May your day be filled with laughter, love, and the sweet happiness you bring to my life every day.
+      I’m so lucky to have you. 💖
+    </p>
+
+    <button onclick="playMusic()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow-lg transition">
+      Play Music 🎵
+    </button>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="bg-white py-16 px-6 text-center">
+    <h2 class="text-3xl md:text-4xl text-pink-600 font-semibold mb-10">📸 Our Beautiful Memories</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <img src="https://source.unsplash.com/500x500/?couple,love" class="rounded-xl shadow-lg hover:scale-105 transition duration-300" />
+      <img src="https://source.unsplash.com/500x500/?love,happy" class="rounded-xl shadow-lg hover:scale-105 transition duration-300" />
+      <img src="https://source.unsplash.com/500x500/?romantic,moment" class="rounded-xl shadow-lg hover:scale-105 transition duration-300" />
+      <img src="https://source.unsplash.com/500x500/?vacation,couple" class="rounded-xl shadow-lg hover:scale-105 transition duration-300" />
+      <img src="https://source.unsplash.com/500x500/?kiss,sunset" class="rounded-xl shadow-lg hover:scale-105 transition duration-300" />
+      <img src="https://source.unsplash.com/500x500/?love,anniversary" class="rounded-xl shadow-lg hover:scale-105 transition duration-300" />
+    </div>
+  </section>
+
+  <!-- Countdown Section -->
+  <section class="bg-pink-50 py-16 px-6 text-center">
+    <h2 class="text-3xl md:text-4xl text-pink-600 font-semibold mb-6">⏳ Countdown to Our Anniversary</h2>
+    <div class="flex flex-col items-center justify-center gap-8 md:flex-row">
+      <div class="text-2xl text-gray-700">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center" id="countdown">
+          <div>
+            <div id="days" class="text-4xl text-pink-600 font-bold">00</div>
+            <div class="text-sm">Days</div>
+          </div>
+          <div>
+            <div id="hours" class="text-4xl text-pink-600 font-bold">00</div>
+            <div class="text-sm">Hours</div>
+          </div>
+          <div>
+            <div id="minutes" class="text-4xl text-pink-600 font-bold">00</div>
+            <div class="text-sm">Minutes</div>
+          </div>
+          <div>
+            <div id="seconds" class="text-4xl text-pink-600 font-bold">00</div>
+            <div class="text-sm">Seconds</div>
+          </div>
+        </div>
+      </div>
+      <!-- Your Couple Photo -->
+      <div>
+        <img src="https://source.unsplash.com/300x300/?couple,hug" alt="Our Photo" class="rounded-full border-4 border-pink-300 shadow-lg w-40 h-40 object-cover mx-auto" />
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-gray-500">Let’s count every second until our love day 💗</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 pb-6">
+    Made with 💖 by Your Love
+  </footer>
+
+  <!-- Audio -->
+  <audio id="birthday-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+  <!-- Script -->
+  <script>
+    function playMusic() {
+      const music = document.getElementById("birthday-music");
+      music.play();
+    }
+
+    // Confetti
+    const confettiContainer = document.getElementById("confetti-container");
+
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+      confettiContainer.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3000);
+    }
+
+    setInterval(createConfetti, 200);
+
+    // Countdown Timer
+    const targetDate = new Date("2019-12-14T00:00:00"); // 🎯 Replace with your anniversary date (YYYY-MM-DD)
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "<p class='text-xl text-pink-600'>Happy Anniversary 💕</p>";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
